@@ -39,21 +39,41 @@ class RenderPdf(webapp2.RequestHandler):
             # Check if style embedder is checked
             if self.request.get("embed_styles") == 'on':
                 logging.info("Embedding default styles for PDF")
+                # @todo: embed CSS from 'templates/reports/_styles.html'
+                # -- before the </head> element in the document
+                # -- or create <head></head> and inject in there
+                if "</head>" in html:
+                    logging.info("Head found.")
+                else:
+                    logging.info("No head found, creating...")
+                    # Find <body> and inject before that
+                    body_loc = html.index("<body>")
+                    html = "{}<head></head>{}".format(
+                        html[:body_loc], html[body_loc:])
 
+                # Fetch styles html
+                styles_template = 'templates/reports/_styles.html'
+                styles_html = render_template(styles_template)
+
+                # Find </head> and inject styles before that
+                head_loc = html.index("</head>")
+                html = "{}{}{}".format(
+                    html[:head_loc], styles_html, html[head_loc:])
+
+        # Init DocRaptor Api
         docraptor.configuration.username = "ONweg0Cg51Sb6erdp9"
-        # this key works for test documents
-
         doc_api = docraptor.DocApi()
 
-        time_counter = 0;
-        sleep_time = 0.1;
+        # Variables for tracking generation time
+        time_counter = 0
+        sleep_increment = 0.1  # in seconds
 
         try:
             create_response = doc_api.create_async_doc({
-                "test": True,                                                   # test documents are free but watermarked
-                "document_content": html,    # supply content directly
-                "name": "docraptor-python.pdf",                                # help you find a document later
-                "document_type": "pdf",                                         # pdf or xls or xlsx
+                "test": True,         # test documents are free but watermarked
+                "document_content": html,           # supply content directly
+                "name": "docraptor-python.pdf",     # help find document later
+                "document_type": "pdf",             # pdf or xls or xlsx
             })
 
             while True:
@@ -61,7 +81,7 @@ class RenderPdf(webapp2.RequestHandler):
                 if status_response.status == "completed":
                     doc_response = doc_api.get_async_doc(status_response.download_id)
                     logging.info("PDF generated in ~{}ms".format(
-                        time_counter * sleep_time * 1000))
+                        time_counter * sleep_increment * 1000))
                     self.response.out.write(doc_response)
                     self.response.headers.add_header(
                         "Content-disposition", "attachment")
@@ -73,8 +93,8 @@ class RenderPdf(webapp2.RequestHandler):
                     logging.critical(status_response)
                     break
                 else:
-                    time_counter += 1;
-                    time.sleep(sleep_time)
+                    time_counter += 1
+                    time.sleep(sleep_increment)
 
         except docraptor.rest.ApiException as error:
             logging.critical(error)
