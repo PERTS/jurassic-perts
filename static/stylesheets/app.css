@@ -130,15 +130,24 @@ input.btn:hover {
   color: white;
   background-color: #c9264f;
 }
+/* line 114, ../../sass/app.scss */
+input.btn:focus {
+  color: white;
+}
 
-/* line 118, ../../sass/app.scss */
+/* line 119, ../../sass/app.scss */
+.input-wrapper {
+  margin-top: 15px;
+}
+
+/* line 125, ../../sass/app.scss */
 #main-page {
   position: relative;
   height: 100%;
   padding-right: 520px;
 }
 
-/* line 124, ../../sass/app.scss */
+/* line 131, ../../sass/app.scss */
 .jurassic-background {
   position: relative;
   height: 100%;
@@ -150,7 +159,7 @@ input.btn:hover {
   background-image: url(/static/images/raptor_og.jpg);
 }
 
-/* line 132, ../../sass/app.scss */
+/* line 139, ../../sass/app.scss */
 .sidepanel {
   position: absolute;
   right: 0;
@@ -160,12 +169,12 @@ input.btn:hover {
   background-color: white;
 }
 
-/* line 141, ../../sass/app.scss */
+/* line 148, ../../sass/app.scss */
 .content {
   padding: 30px 30px;
 }
 
-/* line 145, ../../sass/app.scss */
+/* line 152, ../../sass/app.scss */
 footer {
   position: absolute;
   bottom: 0;

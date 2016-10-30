@@ -25,8 +25,14 @@
       <form id="docForm" action="/api/doc" method="POST" enctype="multipart/form-data">
         <input multiple id="file" name="attachments" type="file">
         <div class="input-wrapper">
-          <label>Enter your secret code</label><br>
+          <label>Enter your secret code (not in use)</label><br>
           <input type="text" placeholder="Code"></input>
+        </div>
+        <div class="input-wrapper">
+          <input type="checkbox" name="embed_styles">
+          <label for="embed_styles">
+            Embed standard styles?
+          </label>
         </div>
         <input type="submit" class="btn" value="PDF Please!"></input>
       </form>

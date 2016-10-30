@@ -111,6 +111,13 @@ input.btn {
     color: white;
     background-color: darken(#D8315B, 5);
   }
+  &:focus {
+    color: white;
+  }
+}
+
+.input-wrapper {
+  margin-top: 15px;
 }
 
 $sidepanel-size: 520px;

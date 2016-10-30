@@ -31,28 +31,22 @@ class RenderPdf(webapp2.RequestHandler):
     def post(self):
         document = self.request.POST.getall('attachments')[0]
         if isinstance(document, unicode):
-            html = '<h1>I\'m a document!</h1>'
+            template_name = 'templates/reports/example.html'
+            html = render_template(template_name)
+            logging.info("Generating PDF from: {}".format(template_name))
         else:
             html = document.file.read()
+            # Check if style embedder is checked
+            if self.request.get("embed_styles") == 'on':
+                logging.info("Embedding default styles for PDF")
 
         docraptor.configuration.username = "ONweg0Cg51Sb6erdp9"
         # this key works for test documents
 
         doc_api = docraptor.DocApi()
 
-        # response = doc_api.create_doc({
-        #     "test": True,
-        #     "document_content": html,
-        #     "name": "docraptor-python.pdf",
-        #     "document_type": "pdf",
-        # })
-
-        # file = open("/tmp/docraptor-python.pdf", "wb")
-        # file.write(response)
-        # file.close
-        # logging.critical("Wrote PDF to /tmp/docraptor-python.pdf")
-
-        # self.response.write(response)
+        time_counter = 0;
+        sleep_time = 0.1;
 
         try:
             create_response = doc_api.create_async_doc({
@@ -66,10 +60,8 @@ class RenderPdf(webapp2.RequestHandler):
                 status_response = doc_api.get_async_doc_status(create_response.status_id)
                 if status_response.status == "completed":
                     doc_response = doc_api.get_async_doc(status_response.download_id)
-                    # file = open("/tmp/docraptor-python.pdf", "wb")
-                    # file.write(doc_response)
-                    # file.close
-                    # logging.critical("Wrote PDF to /tmp/docraptor-python.pdf")
+                    logging.info("PDF generated in ~{}ms".format(
+                        time_counter * sleep_time * 1000))
                     self.response.out.write(doc_response)
                     self.response.headers.add_header(
                         "Content-disposition", "attachment")
@@ -81,7 +73,8 @@ class RenderPdf(webapp2.RequestHandler):
                     logging.critical(status_response)
                     break
                 else:
-                    time.sleep(0.5)
+                    time_counter += 1;
+                    time.sleep(sleep_time)
 
         except docraptor.rest.ApiException as error:
             logging.critical(error)
@@ -89,6 +82,10 @@ class RenderPdf(webapp2.RequestHandler):
             logging.critical(error.code)
             logging.critical(error.response_body)
 
+
+# Loads html from a template using jinja2
+def render_template(template, **template_data):
+    return JINJA_ENVIRONMENT.get_template(template).render(**template_data)
 
 
 application = webapp2.WSGIApplication([
