@@ -1,0 +1,37 @@
+{% extends 'templates/base.html' %}
+
+<!-- SEO tags -->
+
+{% set title = "- Home" %}
+{% set desc = "" %}
+
+{% block content %}
+<div id="main-page">
+  <div class="jurassic-background"></div>
+  <div class="sidepanel">
+    <div class="content">
+      <h1>
+        Jurassic PERTS
+      </h1>
+      <h4>
+        Turn your HTML into beautiful PDFs using
+        <a href="https://docraptor.com/" target="_blank">DocRaptor</a>.
+      </h4>
+      <p>
+        Use the file attachment form below to select an HTML file on your
+        system. Then hit the button and wait to receive a PDF version of your
+        file.
+      </p>
+      <form id="docForm" action="/api/doc" method="POST" enctype="multipart/form-data">
+        <input multiple id="file" name="attachments" type="file">
+        <div class="input-wrapper">
+          <label>Enter your secret code</label><br>
+          <input type="text" placeholder="Code"></input>
+        </div>
+        <input type="submit" class="btn" value="PDF Please!"></input>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

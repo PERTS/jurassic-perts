@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<!--[if lt IE 7]>      <html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie10 lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie10 lt-ie9"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js lt-ie10"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js"> <!--<![endif]-->
+<html lang="en" class="no-js">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Primary meta tags for SEO -->
+    <title>Jurassic PERTS {{ title }}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="Jurassic PERTS {{ title }}">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="">
+
+    <!-- Twitter Card data -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:description" content="">
+    <meta property="twitter:title" content="Jurassic PERTS {{ title }}">
+    <meta property="twitter:image:src" content="">
+
+    <!-- Schema.org markup for Google+ -->
+    <meta itemprop="name" content="Jurassic PERTS {{ title }}">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="">
+
+    <!-- Third-party resources -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <script src="/static/javascripts/jquery-1.11.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script type='application/javascript' src='/static/javascripts/fastclick.js'></script>
+
+    <!-- Stylesheets -->
+    <link type="text/css" rel="stylesheet" href="/static/stylesheets/app.css"/>
+
+    <!-- Javascripts -->
+    <script src="/static/javascripts/app.js"></script>
+
+    {% block head %}
+    {% endblock %}
+
+  </head>
+
+  <body>
+    <main>
+      <!-- Scrolling div -->
+      <div class="full-container">
+
+        {% include 'templates/components/_header.html' %}
+
+        {% block content %}
+        <!-- Main content -->
+        {% endblock %}
+
+        <!-- <footer>
+
+          &copy; 2016 PERTS
+
+        </footer> -->
+
+      </div>
+    </main>
+  </body>
+
+</html>
