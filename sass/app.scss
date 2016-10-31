@@ -64,7 +64,10 @@ button {
 }
 
 h1 {
-  font-weight: 700;
+  font-weight: 800;
+  font-size: 28px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 h4 {
@@ -79,8 +82,7 @@ h4 {
 }
 
 p {
-  margin-top: 20px;
-  margin-bottom: 30px;
+  margin: 30px auto;
   font-size: 17px;
 }
 
@@ -106,6 +108,7 @@ input.btn {
   color: white;
   padding: 45px 30px;
   font-size: 22px;
+  @include border-radius(0);
 
   &:hover {
     color: white;
@@ -143,10 +146,11 @@ $sidepanel-size: 520px;
   top: 0;
   height: 100%;
   background-color: white;
+  @include box-shadow(-3px 0 10px 0 rgba(0,0,0,0.5));
 }
 
 .content {
-  padding: 30px 30px;
+  padding: 20px 30px 30px 30px;
 }
 
 footer {

@@ -76,29 +76,31 @@ button {
 
 /* line 66, ../../sass/app.scss */
 h1 {
-  font-weight: 700;
+  font-weight: 800;
+  font-size: 28px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-/* line 70, ../../sass/app.scss */
+/* line 73, ../../sass/app.scss */
 h4 {
   font-size: 14px;
   font-weight: 700;
   color: #777;
 }
-/* line 75, ../../sass/app.scss */
+/* line 78, ../../sass/app.scss */
 h4 > a {
   text-decoration: underline;
   color: #777;
 }
 
-/* line 81, ../../sass/app.scss */
+/* line 84, ../../sass/app.scss */
 p {
-  margin-top: 20px;
-  margin-bottom: 30px;
+  margin: 30px auto;
   font-size: 17px;
 }
 
-/* line 87, ../../sass/app.scss */
+/* line 89, ../../sass/app.scss */
 input[type=file] {
   display: block;
   margin: 20px auto;
@@ -107,14 +109,14 @@ input[type=file] {
   width: 100%;
 }
 
-/* line 95, ../../sass/app.scss */
+/* line 97, ../../sass/app.scss */
 input[type=text] {
   padding: 10px 15px;
   width: 100%;
   border: 2px solid #202020;
 }
 
-/* line 101, ../../sass/app.scss */
+/* line 103, ../../sass/app.scss */
 input.btn {
   position: absolute;
   bottom: 0;
@@ -124,30 +126,33 @@ input.btn {
   color: white;
   padding: 45px 30px;
   font-size: 22px;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
 }
-/* line 110, ../../sass/app.scss */
+/* line 113, ../../sass/app.scss */
 input.btn:hover {
   color: white;
   background-color: #c9264f;
 }
-/* line 114, ../../sass/app.scss */
+/* line 117, ../../sass/app.scss */
 input.btn:focus {
   color: white;
 }
 
-/* line 119, ../../sass/app.scss */
+/* line 122, ../../sass/app.scss */
 .input-wrapper {
   margin-top: 15px;
 }
 
-/* line 125, ../../sass/app.scss */
+/* line 128, ../../sass/app.scss */
 #main-page {
   position: relative;
   height: 100%;
   padding-right: 520px;
 }
 
-/* line 131, ../../sass/app.scss */
+/* line 134, ../../sass/app.scss */
 .jurassic-background {
   position: relative;
   height: 100%;
@@ -159,7 +164,7 @@ input.btn:focus {
   background-image: url(/static/images/raptor_og.jpg);
 }
 
-/* line 139, ../../sass/app.scss */
+/* line 142, ../../sass/app.scss */
 .sidepanel {
   position: absolute;
   right: 0;
@@ -167,14 +172,17 @@ input.btn:focus {
   top: 0;
   height: 100%;
   background-color: white;
-}
-
-/* line 148, ../../sass/app.scss */
-.content {
-  padding: 30px 30px;
+  -moz-box-shadow: -3px 0 10px 0 rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: -3px 0 10px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: -3px 0 10px 0 rgba(0, 0, 0, 0.5);
 }
 
 /* line 152, ../../sass/app.scss */
+.content {
+  padding: 20px 30px 30px 30px;
+}
+
+/* line 156, ../../sass/app.scss */
 footer {
   position: absolute;
   bottom: 0;
