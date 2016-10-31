@@ -5,6 +5,7 @@ import urllib
 import logging
 import time
 import shutil
+import datetime
 
 import webapp2
 import jinja2
@@ -30,9 +31,12 @@ class RenderPdf(webapp2.RequestHandler):
 
     def post(self):
         document = self.request.POST.getall('attachments')[0]
+        template_data = {}
+        now = datetime.datetime.now()
+        template_data['monthyear'] = now.strftime("%B %Y")
         if isinstance(document, unicode):
             template_name = 'templates/reports/example.html'
-            html = render_template(template_name)
+            html = render_template(template_name, **template_data)
             logging.info("Generating PDF from: {}".format(template_name))
         else:
             html = document.file.read()
