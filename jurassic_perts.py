@@ -78,6 +78,9 @@ class RenderPdf(webapp2.RequestHandler):
                 "document_content": html,           # supply content directly
                 "name": "docraptor-python.pdf",     # help find document later
                 "document_type": "pdf",             # pdf or xls or xlsx
+                "prince_options": {
+                    "javascript": True,             # generated content in js
+                }
             })
 
             while True:
