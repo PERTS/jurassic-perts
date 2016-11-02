@@ -371,20 +371,23 @@ div.pass{
   size: 8.5in 11in;
   margin: 0;
   padding: 0.5in 0.5in 1.0in 0.5in;
-  border-top: solid #042744 25pt;
+  border-bottom: solid #042744 32pt;
 
   @top-left {
     content: string(pdf-title);
-    padding-top: 28pt;
+    border-top: solid #3fadea 35pt;
+    border-right: solid transparent 35pt;
+    padding-top: 8pt;
     padding-left: 0.5in;
     color: white;
     font-family: "Helvetica-Neue", Helvetica, arial, sans-serif;
     font-size: 10pt;
     font-weight: bold;
+    width: 50%;
   }
   @top-right {
-    content: string(section-title);
-    padding-top: 28pt;
+    content: url("https://s3.amazonaws.com/PERTS/images/perts-logo-small.png");
+    padding-top: 45pt;
     padding-right: 0.5in;
     color: white;
     font-family: "Helvetica-Neue", Helvetica, arial, sans-serif;
@@ -392,14 +395,15 @@ div.pass{
     font-weight: bold;
   }
   @bottom-left {
-    padding-bottom: 60pt;
+    padding-bottom: 35pt;
     padding-left: 0.5in;
-    content: url("powered_by_logo.png");
+    color: white;
   }
 
   @bottom-right {
-    padding-bottom: 60pt;
+    padding-bottom: 35pt;
     padding-right: 0.5in;
+    color: white;
     content: "" counter(page) " / " counter(pages);
     font-family: "Helvetica-Neue", Helvetica, arial, sans-serif;
     font-size: 11pt;
@@ -407,9 +411,10 @@ div.pass{
 }
 /* Removes stlying on cover page */
 @page:first {
-  border-top: 0;
+  border-bottom: 0;
   @top-left {
     content: "";
+    border-top: 0;
   }
   @top-right {
     content: "";
