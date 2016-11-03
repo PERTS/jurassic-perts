@@ -403,7 +403,7 @@ div.pass{
     font-weight: bold;
   }
   @bottom-left {
-    padding-bottom: 35pt;
+    padding-bottom: 38pt;
     padding-left: 0.5in;
     color: white;
     font-family: "Helvetica-Neue", Helvetica, arial, sans-serif;
@@ -414,7 +414,7 @@ div.pass{
   }
 
   @bottom-right {
-    padding-bottom: 35pt;
+    padding-bottom: 38pt;
     padding-right: 0.5in;
     color: white;
     content: "" counter(page) " / " counter(pages);
@@ -563,6 +563,10 @@ div.pass{
     padding-top: 0;
   }
 
+  #TOC {
+    page-break-after: always !important;
+  }
+
   #TOC li {
     color: #338EDD;
   }
@@ -578,6 +582,55 @@ div.pass{
     color: #338EDD;
     font-weight: bold;
   }
+  #TOC a[href]::after {
+    content: leader(".") target-counter(attr(href), page);
+  }
+
+  /* START from https://www.princexml.com/forum/topic/1200/generating-a-toc-with-php */
+
+  #toc {
+    page-break-after: always;
+  }
+
+  #toc  > li > a::before {
+    content: target-counter(attr(href), h2) ". ";
+  }
+
+  #toc  > li > ol > li > a::before {
+    content: target-counter(attr(href), h2) "." target-counter(attr(href), h3) ". ";
+  }
+
+  #toc  > li > ol > li > ol > li > a::before {
+    content: target-counter(attr(href), h2) "." target-counter(attr(href), h3) "." target-counter(attr(href), h4) ". ";
+  }
+
+  #toc a::after {
+    content: leader(".") target-counter(attr(href), page);
+  }
+
+  #toc, #toc ol {
+    page: table-of-contents;
+    list-style-type: none;
+  }
+
+  #toc::before {
+    content: "Table of Contents";
+    font-size: 12pt;
+    line-height: 1.2;
+    padding-top: 1em;
+    margin: 2em 0 0.5em 0;
+    page-break-after: avoid;
+    clear: both;
+    font-weight:bold;
+  }
+  #toc li::marker { width: 2.4cm }
+  #toc li.left::marker { text-align: left }
+  #toc li.center::marker { text-align: center }
+  #toc li.right::marker { text-align: right }
+
+  /* END from https://www.princexml.com/forum/topic/1200/generating-a-toc-with-php */
+
+  /* Read this https://www.w3.org/TR/css-gcpm-3/ */
 
   table.xtable tr:first-child {
     position: relative;
