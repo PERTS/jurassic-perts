@@ -6,12 +6,15 @@ import logging
 import time
 import shutil
 import datetime
+import json
 
 import webapp2
 import jinja2
 import docraptor
 
 from google.appengine.api import urlfetch
+
+from secretvalue import SecretValue
 
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -110,12 +113,45 @@ class RenderPdf(webapp2.RequestHandler):
             logging.critical(error.response_body)
 
 
+class SecretValues(webapp2.RequestHandler):
+    """For securely storing secret values."""
+
+    def get(self, id):
+        # if not app_engine_users.is_current_user_admin():
+        #     raise PermissionDenied()
+        logging.info('Fetching secret value')
+        exists = SecretValue.get_by_id(id) is not None
+        self.response.out.write(json.dumps(
+            {'key exists': exists,
+             'message': "SecretValues can't be read via api urls."}))
+
+    def post(self, id):
+        # if not app_engine_users.is_current_user_admin():
+        #     raise PermissionDenied()
+        value = self.request.params.get('value', None)
+        if value is None:
+            raise Exception("Must POST with a value.")
+        sv = SecretValue.get_or_insert(id)
+        sv.value = value
+        sv.put()
+        self.response.out.write(id)
+
+    def delete(self, id):
+        # if not app_engine_users.is_current_user_admin():
+        #     raise PermissionDenied()
+        sv = SecretValue.get_by_id(id)
+        if sv is not None:
+            sv.key.delete()
+        self.response.out.write(id)
+
+
 # Loads html from a template using jinja2
 def render_template(template, **template_data):
     return JINJA_ENVIRONMENT.get_template(template).render(**template_data)
 
 
 application = webapp2.WSGIApplication([
-    ('/', MainPage),
-    ('/api/doc', RenderPdf),
+    webapp2.Route(r'/', handler=MainPage, name='home'),
+    webapp2.Route(r'/api/doc', handler=RenderPdf, name='render_pdf'),
+    webapp2.Route(r'/api/secret_values/<id>', handler=SecretValues, name='secret_values'),
 ], debug=True)
