@@ -68,7 +68,12 @@ class RenderPdf(webapp2.RequestHandler):
                     html[:head_loc], styles_html, html[head_loc:])
 
         # Init DocRaptor Api
-        docraptor.configuration.username = "ONweg0Cg51Sb6erdp9"
+        docraptor_username = SecretValue.get_by_id('docraptor_usernam')
+        if docraptor_username is None:
+            logging.error('Please set docraptor_username with SecretValue')
+            return
+        logging.critical(docraptor_username.value)
+        docraptor.configuration.username = docraptor_username.value
         doc_api = docraptor.DocApi()
 
         # Variables for tracking generation time
