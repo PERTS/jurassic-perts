@@ -68,7 +68,7 @@ class RenderPdf(webapp2.RequestHandler):
                     html[:head_loc], styles_html, html[head_loc:])
 
         # Init DocRaptor Api
-        docraptor_username = SecretValue.get_by_id('docraptor_usernam')
+        docraptor_username = SecretValue.get_by_id('docraptor_username')
         if docraptor_username is None:
             logging.error('Please set docraptor_username with SecretValue')
             return
