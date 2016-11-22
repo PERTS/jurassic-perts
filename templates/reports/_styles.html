@@ -378,7 +378,7 @@ div.pass{
 @page {
   size: 8.5in 11in;
   margin: 0;
-  padding: 0.5in 0.5in 1.0in 0.5in;
+  padding: 0.75in 0.5in 1.0in 0.5in;
   border-bottom: solid #042744 32pt;
 
   @top-left {
@@ -445,8 +445,9 @@ div.pass{
   text-align: center;
 }
 #cover_page img {
-  margin-top: 10%;
-  width: 75%;
+  margin-top: 20%;
+  margin-bottom: 10%;
+  width: 50%;
 }
 #cover_page h2 {
   font-size: 14pt;
@@ -502,6 +503,8 @@ div.pass{
   color: white !important;
 }
 
+/* END from https://www.princexml.com/forum/topic/1200/generating-a-toc-with-php */
+
 @media print {
   a[href] {
     color: #338EDD !important;
@@ -540,72 +543,62 @@ div.pass{
   }
 
   /* Sets title for page header */
+
   h1.title {
     string-set: pdf-title content();
   }
 
+  /* Three levels of headers */
+
   h2 {
     margin-top: 20pt;
-    font-size: 15pt;
+    font-size: 17pt;
     color: #042744 !important;
     -webkit-print-color-adjust: exact;
     string-set: section-title content();
     border-bottom: 0;
+    counter-increment: h2;
   }
 
   h3 {
     margin-top: 15pt;
-    font-size: 13pt;
+    font-size: 14.5pt;
+    color: #3fadea !important;
+    counter-increment: h3;
   }
 
-  .main-container h1 {
-    margin-top: 0;
-    padding-top: 0;
-  }
-
-  #TOC {
-    page-break-after: always !important;
-  }
-
-  #TOC li {
-    color: #338EDD;
-  }
-  #TOC li a {
-    color: #338EDD;
-  }
-
-  /* Magically styles an awesome TOC */
-  #TOC ol { counter-reset: list-item }
-  #TOC li { counter-increment: list-item }
-  #TOC li::marker {
-    content: counters(list-item, ".", decimal);
-    color: #338EDD;
-    font-weight: bold;
-  }
-  #TOC a[href]::after {
-    content: leader(".") target-counter(attr(href), page);
+  h4 {
+    counter-increment: h4;
   }
 
   /* START from https://www.princexml.com/forum/topic/1200/generating-a-toc-with-php */
 
   #toc {
     page-break-after: always;
+    margin-top: 20pt;
+    counter-reset: h2;
   }
 
-  #toc  > li > a::before {
+  #toc > li > a::before {
     content: target-counter(attr(href), h2) ". ";
   }
 
-  #toc  > li > ol > li > a::before {
+  #toc > li > ol > li > a::before {
     content: target-counter(attr(href), h2) "." target-counter(attr(href), h3) ". ";
   }
 
-  #toc  > li > ol > li > ol > li > a::before {
+  #toc > li > ol > li > ol > li > a::before {
     content: target-counter(attr(href), h2) "." target-counter(attr(href), h3) "." target-counter(attr(href), h4) ". ";
   }
 
+  #toc a {
+    color: #042744 !important;
+    text-decoration: none;
+    line-height: 1.2;
+  }
+
   #toc a::after {
-    content: leader(".") target-counter(attr(href), page);
+    content: leader(".") target-counter(attr(href), page, decimal) !important;
   }
 
   #toc, #toc ol {
@@ -615,10 +608,11 @@ div.pass{
 
   #toc::before {
     content: "Table of Contents";
-    font-size: 12pt;
+    font-size: 17pt;
+    color: #3fadea !important;
     line-height: 1.2;
-    padding-top: 1em;
-    margin: 2em 0 0.5em 0;
+    margin-bottom: 15pt;
+    display: inline-block;
     page-break-after: avoid;
     clear: both;
     font-weight:bold;
@@ -627,8 +621,6 @@ div.pass{
   #toc li.left::marker { text-align: left }
   #toc li.center::marker { text-align: center }
   #toc li.right::marker { text-align: right }
-
-  /* END from https://www.princexml.com/forum/topic/1200/generating-a-toc-with-php */
 
   /* Read this https://www.w3.org/TR/css-gcpm-3/ */
 

@@ -72,7 +72,6 @@ class RenderPdf(webapp2.RequestHandler):
         if docraptor_username is None:
             logging.error('Please set docraptor_username with SecretValue')
             return
-        logging.critical(docraptor_username.value)
         docraptor.configuration.username = docraptor_username.value
         doc_api = docraptor.DocApi()
 
@@ -87,7 +86,8 @@ class RenderPdf(webapp2.RequestHandler):
                 "name": "docraptor-python.pdf",     # help find document later
                 "document_type": "pdf",             # pdf or xls or xlsx
                 "prince_options": {
-                    "javascript": True,             # generated content in js
+                    "javascript": True             # generated content in js
+                    # 'baseurl': 'https://s3.amazonaws.com'
                 }
             })
 
