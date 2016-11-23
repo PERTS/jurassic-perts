@@ -174,15 +174,6 @@ dl dd > :first-child {
 dl dd > :last-child {
    margin-bottom: 0; }
 
-blockquote {
-   border-left: 4px solid #dddddd;
-   padding: 0 15px;
-   color: #777777; }
-blockquote > :first-child {
-   margin-top: 0; }
-blockquote > :last-child {
-   margin-bottom: 0; }
-
 table tr td{
   padding-left:20px;
   padding-top:5px;
@@ -509,7 +500,20 @@ div.pass{
   color: white !important;
 }
 
-/* END from https://www.princexml.com/forum/topic/1200/generating-a-toc-with-php */
+/* Blockquotes */
+
+blockquote {
+  border-left: 4px solid #3faded;
+  margin: 20pt 0 20pt 35pt;
+  padding: 5pt 45pt 5pt 10pt;
+  color: #555566 !important;
+}
+blockquote > :first-child {
+  margin-top: 0;
+}
+blockquote > :last-child {
+  margin-bottom: 0;
+}
 
 @media print {
   a[href] {
