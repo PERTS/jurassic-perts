@@ -30,7 +30,7 @@ div#logo {
 /* Taken from https://github.com/jasonm23/markdown-css-themes */
 body {
    font-family: Helvetica, arial, sans-serif;
-   font-size: 14px;
+   font-size: 11pt;
    line-height: 1.2;
    padding-top: 10px;
    padding-bottom: 10px;
@@ -378,7 +378,7 @@ div.pass{
 @page {
   size: 8.5in 11in;
   margin: 0;
-  padding: 0.75in 0.5in 1.0in 0.5in;
+  padding: 0.75in 0.5in 0.25in 0.5in;
   border-bottom: solid #042744 32pt;
 
   @top-left {
@@ -420,6 +420,12 @@ div.pass{
     content: "" counter(page) " / " counter(pages);
     font-family: "Helvetica-Neue", Helvetica, arial, sans-serif;
     font-size: 11pt;
+  }
+
+  @footnotes {
+    border-top: 0.6pt solid black;
+    padding-top: 8pt;
+    margin-top: 8pt;
   }
 }
 /* Removes stlying on cover page */
@@ -623,6 +629,31 @@ div.pass{
   #toc li.right::marker { text-align: right }
 
   /* Read this https://www.w3.org/TR/css-gcpm-3/ */
+
+  /* Special styling of various elements in TOC */
+
+  #toc ol {
+    margin-bottom: 0;
+  }
+
+  #toc > li {
+    margin-bottom: 5pt;
+  }
+
+  #toc ol {
+    margin-bottom: 5pt;
+  }
+
+  #toc > li > a {
+    font-weight: 700;
+  }
+
+  .fn {
+    display: prince-footnote;
+    counter-increment: footnote;
+    font-size: 9pt;
+    footnote-style-position: inside;
+  }
 
   table.xtable tr:first-child {
     position: relative;
