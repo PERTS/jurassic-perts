@@ -89,11 +89,11 @@ h1 {
    font-size: 28px;
    color: black;
    margin-top: 1.75em; }
-
 h2 {
    font-size: 24px;
    border-bottom: 1px solid #cccccc;
    color: black; }
+
 
 h3 {
    font-size: 18px; }
@@ -174,7 +174,8 @@ dl dd > :first-child {
 dl dd > :last-child {
    margin-bottom: 0; }
 
-table tr td{
+
+table tr td {
   padding-left: 20px;
   padding-top: 5px;
 }
@@ -182,27 +183,35 @@ table.xtable {
   padding: 0;
   border-collapse: collapse;
   margin: 25pt auto;
-  min-width: 400px;
+  min-width: 50%;
+  color: #3a88c4 !important;
 }
 table.xtable tr {
-  border-top: 1px solid #cccccc;
+  border-top: 1px solid #5bade6;
   background-color: white;
   margin: 0;
   padding: 0;
+  position: relative;
+}
+table.xtable tr:first-child {
+  position: relative;
+  background-color: #d3e9f8 !important;
 }
 table.xtable tr:nth-child(2n) {
   background-color: #f8f8f8;
+  background-color: #eff5f9 !important;
 }
 table.xtable tr th {
   font-weight: bold;
-  border: 1px solid #cccccc;
+  border: 1px solid #5bade6;
+  border-bottom-width: 2px;
   margin: 0;
-  padding: 6px 13px;
+  padding: 8px 15px;
 }
 table.xtable tr td {
-  border: 1px solid #cccccc;
+  border: 1px solid #5bade6;
   margin: 0;
-  padding: 6px 13px;
+  padding: 8px 15px;
 }
 table.xtable tr th :first-child, table tr td :first-child {
   margin-top: 0;
@@ -210,6 +219,15 @@ table.xtable tr th :first-child, table tr td :first-child {
 table.xtable tr th :last-child, table tr td :last-child {
   margin-bottom: 0;
 }
+
+caption {
+  color: #777 !important;
+  text-align: center;
+  font-size: 9.5pt;
+  margin-bottom: 5pt;
+  /*Maybe add counter*/
+}
+
 img {
   max-width: 100%;
 }
@@ -660,16 +678,6 @@ blockquote > :last-child {
     counter-increment: footnote;
     font-size: 9pt;
     footnote-style-position: inside;
-  }
-
-  table.xtable tr:first-child {
-    position: relative;
-    background-color: #e3e3e3 !important;
-  }
-
-  table.xtable tr:nth-child(2n) {
-    position: relative;
-    background-color: #fafafa !important;
   }
 
   p > img, .chart-wrapper > img {
