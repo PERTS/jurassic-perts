@@ -80,7 +80,7 @@ class RenderPdf(webapp2.RequestHandler):
         test_mode = True;
         access_code = SecretValue.get_by_id('access_code')
         if access_code is not None:
-            test_mode = (access_code != self.request.get('access_code'))
+            test_mode = (access_code.value != self.request.get('access_code'))
         else:
             logging.error('No "access_code" value set with SecretValue')
 
