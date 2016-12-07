@@ -20,20 +20,20 @@
       <p>
         Use the file attachment form below to select an HTML file on your
         system. Then hit the button and wait to receive a PDF version of your
-        file.
+        file. <a href="https://github.com/PERTS/jurassic-perts#readme" target="_blank">Learn about styling.</a>
       </p>
       <p>
         A default document will be generated if you do not wish to upload your
         own. Just click the button below.
       </p>
       <form id="docForm" action="/api/doc" method="POST" enctype="multipart/form-data">
-        <input multiple id="file" name="attachments" type="file">
+        <input multiple id="file" name="attachments" type="file" />
         <div class="input-wrapper">
-          <label>Enter your secret code (not in use)</label><br>
-          <input type="text" placeholder="Code"></input>
+          <label>Enter your secret code to remove watermarks<br>(125/mo quota and 7&#162; per document after)</label><br>
+          <input type="text" name="access_code" placeholder="Code" />
         </div>
         <div class="input-wrapper">
-          <input type="checkbox" name="embed_styles">
+          <input type="checkbox" name="embed_styles" checked>
           <label for="embed_styles">
             Embed standard styles?
           </label>

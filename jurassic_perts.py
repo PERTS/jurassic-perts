@@ -44,17 +44,17 @@ class RenderPdf(webapp2.RequestHandler):
         else:
             html = document.file.read()
             # Check if style embedder is checked
-            if self.request.get("embed_styles") == 'on':
-                logging.info("Embedding default styles for PDF")
+            if self.request.get('embed_styles') == 'on':
+                logging.info('Embedding default styles for PDF')
                 # @todo: embed CSS from 'templates/reports/_styles.html'
                 # -- before the </head> element in the document
                 # -- or create <head></head> and inject in there
-                if "</head>" in html:
-                    logging.info("Head found.")
+                if '</head>' in html:
+                    logging.info('Head found.')
                 else:
-                    logging.info("No head found, creating...")
+                    logging.info('No head found, creating...')
                     # Find <body> and inject before that
-                    body_loc = html.index("<body>")
+                    body_loc = html.index('<body>')
                     html = "{}<head></head>{}".format(
                         html[:body_loc], html[body_loc:])
 
@@ -70,10 +70,19 @@ class RenderPdf(webapp2.RequestHandler):
         # Init DocRaptor Api
         docraptor_username = SecretValue.get_by_id('docraptor_username')
         if docraptor_username is None:
-            logging.error('Please set docraptor_username with SecretValue')
+            logging.error('No "docraptor_username" value set with SecretValue')
+            self.response.out.write('Please set "docraptor_username" with SecretValue')
             return
         docraptor.configuration.username = docraptor_username.value
         doc_api = docraptor.DocApi()
+
+        # Determine if we'll be using test mode or not.
+        test_mode = True;
+        access_code = SecretValue.get_by_id('access_code')
+        if access_code is not None:
+            test_mode = (access_code == self.request.get('access_code'))
+        else:
+            logging.error('No "access_code" value set with SecretValue')
 
         # Variables for tracking generation time
         time_counter = 0
@@ -81,7 +90,7 @@ class RenderPdf(webapp2.RequestHandler):
 
         try:
             create_response = doc_api.create_async_doc({
-                "test": True,         # test documents are free but watermarked
+                "test": test_mode,         # test documents are free but watermarked
                 "document_content": html,           # supply content directly
                 "name": "docraptor-python.pdf",     # help find document later
                 "document_type": "pdf",             # pdf or xls or xlsx

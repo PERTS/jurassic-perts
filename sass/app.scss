@@ -41,6 +41,11 @@ h1, h2, h3, h4, h5, h6 {
 
 a, [ng-click] {
   cursor: pointer;
+  color: $red-color;
+
+  &:hover {
+    color: $red-color;
+  }
 }
 
 .pull-right {
@@ -104,7 +109,7 @@ input.btn {
   position: absolute;
   bottom: 0; left: 0;
   width: 100%;
-  background-color: #D8315B;
+  background-color: $red-color;
   color: white;
   padding: 45px 30px;
   font-size: 22px;
@@ -112,7 +117,7 @@ input.btn {
 
   &:hover {
     color: white;
-    background-color: darken(#D8315B, 5);
+    background-color: darken($red-color, 5);
   }
   &:focus {
     color: white;
