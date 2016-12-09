@@ -42,7 +42,48 @@ but can be turned off if you'd like to use your own.
 
 ### Table of Contents
 
-The Table of Contents will automatically generate page numbers and 
+The Table of Contents will automatically generate page numbers if properly set
+up. Use a `div` with a `toc` id. (`<div id="toc">...</div>`)
+
+By convention, the first level of headers should match up with `h2` tags in the
+document, the second level should match with `h3` and so on.
+
+The final result might look something like:
+```
+<!-- TOC -->
+<div id="toc">
+  <li>
+    <a href="#section-1">Section 1</a>
+  </li>
+  <li>
+    <a href="#section-2">Section 2</a>
+    <ol>
+      <li>
+        <a href="#level-two-header">
+          Level Two Header
+        </a> 
+      </li>
+      <li>
+        <a href="#exploring-duo-columns">
+          Exploring Duo Columns
+        </a> 
+      </li>
+    </ol>
+  </li>
+  <li>
+    <a href="#section-3">Section 3</a>
+  </li>
+</div>
+```
+
+*Important:* Be sure to include `id` attributes for each of your section
+headers like so:
+```
+<h2 id="section-2">
+  Section 2
+</h2>
+```
+This ensures that the Table of Contents will link to pages within the PDF.
 
 ### Figures
 
@@ -51,8 +92,8 @@ Figures can be inserted anywhere in the document using a `figure` element.
 Example:
 ```
 <figure>
-  <img src="https://acceptance-dot-yellowstoneplatform.appspot.com/static/images/home/success_rate_7_semesters_gms.png" />
-  <figcaption>Something about this.</figcaption>
+  <img src="https://..." />
+  <figcaption>Figure caption goes here</figcaption>
 </figure>
 ```
 
