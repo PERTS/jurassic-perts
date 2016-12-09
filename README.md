@@ -2,7 +2,9 @@ Jurassic PERTS
 ==========
 
 Jurassic PERTS is a tool for generating PDF files from HTML using standard
-styling used by the PERTS organization.
+styling used by the PERTS organization. It is available for use at
+http://jurassic-perts.appspot.com. Please contact the PERTS team for an access
+code to use non-test documents.
 
 ## About Styling
 
@@ -18,7 +20,8 @@ To get better acquianted with DocRaptor and their API you can take a look at
 
 Prince XML is a powerful library for creating PDF documents. They provide a
 wide variety of incredibly useful styles such as column formatting and
-footnotes. Learn more about Prince in their [guide](https://www.princexml.com/doc/)
+footnotes. Learn more about Prince in their
+[guide](https://www.princexml.com/doc/). Settings are managed 
 
 ## Components
 
@@ -84,6 +87,10 @@ headers like so:
 </h2>
 ```
 This ensures that the Table of Contents will link to pages within the PDF.
+These should match the `href`s you specify in the `a` elements in your TOC.
+
+*Note*: We may explore auto-generation of the TOC in future iterations if that
+would be useful.
 
 ### Figures
 
@@ -110,13 +117,45 @@ using the following format: `<figcaption>Caption text</figcaption>`
 
 ### Tables
 
-
+Tables can easily be inserted using the PERTS colors (various shades of blue)
+using the following syntax:
+```
+<table class="xtable">
+  <caption>Title of the table</caption>
+  <tr>
+    <th>Header 1</th>
+    <th>Header 2</th>
+    <th>Header 3</th>
+    <th>Header 4</th>
+  </tr>
+  <tr>
+    <td>Row 1</td>
+    <td>Value 1</td>
+    <td>Value 2</td>
+    <td>Value 3</td>
+  </tr>
+  <tr>
+    <td>Row 2</td>
+    <td>Value 1</td>
+    <td>Value 2</td>
+    <td>Value 3</td>
+  </tr>
+  <tr>
+    <td>Row 3</td>
+    <td>Value 1</td>
+    <td>Value 2</td>
+    <td>Value 3</td>
+  </tr>
+</table>
+```
 
 Be sure to use `th` elements instead of `td` elements for the header row of
 the table. These will apply slightly different styles.
 
 Table captions should be placed before the first row inside of the `table`
 element using `<caption>Title of table</caption>`.
+
+*@todo*: Create other color combinations if desired.
 
 ### Column-Formatting
 
@@ -152,4 +191,20 @@ paragraph text:
 <span class="fn">Footnote text</span>
 ```
 These will automatically number themselves and place the note at the bottom of
-the appropriate page
+the appropriate page.  The full content might look like this:
+```
+<p>
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in sapien
+	a elit commodo tempus. Nam dignissim, augue sit amet vulputate
+	sollicitudin<span class="fn">nibh ligula ultricies nibh</span> ut fermentum 
+	urna massa eget tortor. Phasellus elementum enim vel odio vulputate, quis
+	finibus lorem fermentum. Donec nisi massa, commodo ac malesuada at, maximus
+	in odio. Sed iaculis magna ac dignissim rhoncus. Nulla pretium orci viverra
+	risus volutpat congue. In euismod maximus ligula non pharetra.
+</p>
+```
+
+## Continued Work
+
+Jurassic PERTS can be considered a _beta_ product! Please let us know how we
+can improve it to be easier to use or cover more use-cases.
