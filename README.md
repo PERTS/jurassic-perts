@@ -31,14 +31,14 @@ but can be turned off if you'd like to use your own.
 
 ### Cover page
 
-```
+```html
 <div id="cover_page">
   <img src="https://s3.amazonaws.com/PERTS/images/perts-logo.png" />
   <h1 class="title">
     Example Document
   </h1>
   <h3>
-    {{ monthyear }}
+    July 28, 2016
   </h3>
 </div>
 ```
@@ -52,7 +52,7 @@ By convention, the first level of headers should match up with `h2` tags in the
 document, the second level should match with `h3` and so on.
 
 The final result might look something like:
-```
+```html
 <!-- TOC -->
 <div id="toc">
   <li>
@@ -81,7 +81,7 @@ The final result might look something like:
 
 *Important:* Be sure to include `id` attributes for each of your section
 headers like so:
-```
+```html
 <h2 id="section-2">
   Section 2
 </h2>
@@ -97,7 +97,7 @@ would be useful.
 Figures can be inserted anywhere in the document using a `figure` element.
 
 Example:
-```
+```html
 <figure>
   <img src="https://..." />
   <figcaption>Figure caption goes here</figcaption>
@@ -119,7 +119,7 @@ using the following format: `<figcaption>Caption text</figcaption>`
 
 Tables can easily be inserted using the PERTS colors (various shades of blue)
 using the following syntax:
-```
+```html
 <table class="xtable">
   <caption>Title of the table</caption>
   <tr>
@@ -163,7 +163,7 @@ If you would like the page content to be split into columns, there's a special
 element you can wrap your content in: `<div style="columns: 2"></div>`. This
 could be implemented like so:
 
-```
+```html
 <div style="columns: 2">
 	<p>
 		...
@@ -178,7 +178,7 @@ could be implemented like so:
 
 You can place a page break anywhere by simply adding the following element:
 
-```
+```html
 <div class="page-break"></div>
 ```
 
@@ -187,12 +187,12 @@ You can place a page break anywhere by simply adding the following element:
 Footnotes can be inserted anywhere using the following snippet in your
 paragraph text:
 
-```
+```html
 <span class="fn">Footnote text</span>
 ```
 These will automatically number themselves and place the note at the bottom of
 the appropriate page.  The full content might look like this:
-```
+```html
 <p>
 	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in sapien
 	a elit commodo tempus. Nam dignissim, augue sit amet vulputate
