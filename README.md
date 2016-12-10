@@ -82,9 +82,9 @@ The final result might look something like:
 *Important:* Be sure to include `id` attributes for each of your section
 headers like so:
 ```html
-<h2 id="section-2">
+<h1 id="section-2">
   Section 2
-</h2>
+</h1>
 ```
 This ensures that the Table of Contents will link to pages within the PDF.
 These should match the `href`s you specify in the `a` elements in your TOC.
