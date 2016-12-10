@@ -28,7 +28,7 @@ footnotes. Learn more about Prince in their
 A variety of basic styles are covered by the CSS rules in 
 `/templates/reports/_styles.html`. These are injected in any file by default
 but can be turned off if you'd like to use your own. A full example document
-can be viewed at [example.html](../blob/master/templates/reports/example.html).
+can be viewed at [example.html](../master/templates/reports/example.html).
 
 ### Cover page
 
