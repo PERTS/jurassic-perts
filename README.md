@@ -48,8 +48,8 @@ but can be turned off if you'd like to use your own.
 The Table of Contents will automatically generate page numbers if properly set
 up. Use a `div` with a `toc` id. (`<div id="toc">...</div>`)
 
-By convention, the first level of headers should match up with `h2` tags in the
-document, the second level should match with `h3` and so on.
+By convention, the first level of headers should match up with `h1` tags in the
+document, the second level should match with `h2` and so on.
 
 The final result might look something like:
 ```html
