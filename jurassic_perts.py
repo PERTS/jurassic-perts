@@ -159,6 +159,13 @@ class SecretValues(webapp2.RequestHandler):
         self.response.out.write(id)
 
 
+class ViewHtml(webapp2.RequestHandler):
+    def get(self, filename):
+        template = JINJA_ENVIRONMENT.get_template(
+            'templates/{}.html'.format(filename))
+        self.response.write(template.render())
+
+
 # Loads html from a template using jinja2
 def render_template(template, **template_data):
     return JINJA_ENVIRONMENT.get_template(template).render(**template_data)
@@ -166,6 +173,7 @@ def render_template(template, **template_data):
 
 application = webapp2.WSGIApplication([
     webapp2.Route(r'/', handler=MainPage, name='home'),
+    webapp2.Route(r'/view/<filename>', handler=ViewHtml, name='view_html'),
     webapp2.Route(r'/api/doc', handler=RenderPdf, name='render_pdf'),
     webapp2.Route(r'/api/secret_values/<id>', handler=SecretValues, name='secret_values'),
 ], debug=True)

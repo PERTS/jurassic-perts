@@ -1,0 +1,240 @@
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"></meta>
+    {% include '/templates/reports/_styles.html' %}
+    <style type="text/css">
+      /* Put report-specific styles here */
+    </style>
+  </head>
+  <body>
+    <!-- Cover page -->
+    <div id="cover_page">
+      <img src="https://s3.amazonaws.com/PERTS/images/perts-logo.png" />
+      <h1 class="title">
+        Example Document
+      </h1>
+      <h3>
+        {{ monthyear }}
+      </h3>
+    </div>
+
+    <!-- Main content -->
+    <h1>
+      Brief
+    </h1>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in sapien
+      a elit commodo tempus. Nam dignissim, augue sit amet vulputate
+      sollicitudin, nibh ligula ultricies nibh, ut fermentum urna massa eget
+      tortor. Phasellus elementum enim vel odio vulputate, quis finibus lorem
+      fermentum. Donec nisi massa, commodo ac malesuada at, maximus in odio.
+      Sed iaculis magna ac dignissim rhoncus. Nulla pretium orci viverra risus
+      volutpat congue. In euismod maximus ligula non pharetra.
+    </p>
+    <figure class="half-width">
+      <img src="https://acceptance-dot-yellowstoneplatform.appspot.com/static/images/home/success_rate_7_semesters_gms.png" />
+      <figcaption>Something about this.</figcaption>
+    </figure>
+
+    <div class="page-break"></div>
+
+    <!-- TOC -->
+    <div id="toc">
+      <li>
+        <a href="#section-1">Section 1</a>
+      </li>
+      <li>
+        <a href="#section-2">Section 2</a>
+        <ol>
+          <li>
+            <a href="#level-two-header">
+              Level Two Header
+            </a> 
+          </li>
+          <li>
+            <a href="#exploring-duo-columns">
+              Exploring Duo Columns
+            </a> 
+          </li>
+        </ol>
+      </li>
+      <li>
+        <a href="#section-3">Section 3</a>
+      </li>
+    </div>
+
+    <h1 id="section-1">
+      Section 1
+    </h1>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in sapien
+      a elit commodo tempus. Nam dignissim, augue sit amet vulputate
+      sollicitudin, nibh ligula ultricies nibh, ut fermentum urna massa eget
+      tortor. Phasellus elementum enim vel odio vulputate, quis finibus lorem
+      fermentum. Donec nisi massa, commodo ac malesuada at, maximus in odio.
+      Sed iaculis magna ac dignissim rhoncus. Nulla pretium orci viverra risus
+      volutpat congue. In euismod maximus ligula non pharetra.
+    </p>
+
+    <blockquote>
+      Phasellus elementum enim vel odio vulputate, quis finibus lorem
+      fermentum. Donec nisi massa, commodo ac malesuada at, maximus in odio.
+      Sed iaculis magna ac dignissim rhoncus.
+    </blockquote>
+
+    <p>
+      Anyway. This is a simple line of text.
+    </p>
+
+    <h1 id="section-2">
+      Section 2
+    </h1>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in sapien
+      a elit commodo tempus. Nam dignissim, augue sit amet vulputate
+      sollicitudin, nibh ligula ultricies nibh, ut fermentum urna massa eget
+      tortor.
+    </p>
+
+    <h2 id="level-two-header">
+      Level Two Header
+    </h2> 
+    <p>
+      This section has a little more to it, like a list and maybe a quote so 
+      that you can really get a feel for all the different components you can
+      use with this wonderful tool.
+    </p>
+    <ul>
+      <li>Something</li>
+      <li>Something else</li>
+      <li>
+        A third thing that has its own things
+        <ul>
+          <li>The first of those things</li>
+          <li>The second of those things</li>
+        </ul>
+      </li>
+      <li>Last but not least</li>
+    </ul>
+
+    <h2 id="exploring-duo-columns">
+      Exploring Duo Columns
+    </h2>
+
+    <div style="columns: 2">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in sapien
+        a elit commodo tempus. Nam dignissim, augue sit amet vulputate
+        sollicitudin, nibh ligula ultricies nibh, ut fermentum urna massa eget
+        tortor. Phasellus<span class="fn">nibh ligula ultricies nibh</span> elementum enim vel odio vulputate, quis finibus lorem
+        fermentum. Donec nisi massa, commodo ac malesuada at, maximus in odio.
+        Sed iaculis magna ac dignissim rhoncus. Nulla pretium orci viverra risus
+        volutpat congue. In euismod maximus ligula non pharetra.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in sapien
+        a elit<span class="fn">nibh ligula ultricies nibh</span> commodo tempus. Nam dignissim, augue sit amet vulputate
+        sollicitudin, nibh ligula ultricies nibh, ut fermentum urna massa eget
+        tortor. Phasellus elementum enim vel odio vulputate, quis finibus lorem
+        fermentum. Donec nisi massa, commodo ac malesuada at, maximus in odio.
+        Sed iaculis magna ac dignissim rhoncus. Nulla pretium orci viverra risus
+        volutpat congue. In euismod maximus ligula non pharetra.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in sapien
+        a elit commodo tempus. Nam dignissim, augue sit amet vulputate
+        sollicitudin, nibh ligula ultricies nibh, ut fermentum urna massa eget
+        tortor. Phasellus elementum enim vel odio vulputate, quis finibus lorem
+        fermentum.
+      </p>
+    </div>
+
+    <h1 id="section-3">
+      Section 3
+    </h1>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in sapien
+      a elit commodo tempus. Nam dignissim, augue sit amet vulputate
+      sollicitudin<span class="fn">nibh ligula ultricies nibh</span> ut fermentum urna massa eget
+      tortor. Phasellus elementum enim vel odio vulputate, quis finibus lorem
+      fermentum. Donec nisi massa, commodo ac malesuada at, maximus in odio.
+      Sed iaculis magna ac dignissim rhoncus. Nulla pretium orci viverra risus
+      volutpat congue. In euismod maximus ligula non pharetra.
+    </p>
+
+    <table class="xtable">
+      <caption>Title of the table</caption>
+      <tr>
+        <th>Header 1</th>
+        <th>Header 2</th>
+        <th>Header 3</th>
+        <th>Header 4</th>
+      </tr>
+      <tr>
+        <td>Row 1</td>
+        <td>Value 1</td>
+        <td>Value 2</td>
+        <td>Value 3</td>
+      </tr>
+      <tr>
+        <td>Row 2</td>
+        <td>Value 1</td>
+        <td>Value 2</td>
+        <td>Value 3</td>
+      </tr>
+      <tr>
+        <td>Row 3</td>
+        <td>Value 1</td>
+        <td>Value 2</td>
+        <td>Value 3</td>
+      </tr>
+    </table>
+
+    <div class="page-break"></div>
+
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in sapien
+      a elit commodo tempus. Nam dignissim, augue sit amet vulputate
+      sollicitudin ut fermentum urna massa eget
+      tortor. Phasellus elementum enim vel odio vulputate, quis finibus lorem
+      fermentum. Donec nisi massa, commodo ac malesuada at, maximus in odio.
+      Sed iaculis magna ac dignissim rhoncus. Nulla pretium orci viverra risus
+      volutpat congue. In euismod maximus ligula non pharetra.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in sapien
+      a elit commodo tempus. Nam dignissim, augue sit amet vulputate
+      sollicitudin ut fermentum urna massa eget
+      tortor. 
+      <div class="float-right">
+        <figure class="full-width">
+          <img src="https://acceptance-dot-yellowstoneplatform.appspot.com/static/images/home/success_rate_7_semesters_gms.png" />
+          <figcaption>Something about this.</figcaption>
+        </figure>
+      </div>
+      Phasellus elementum enim vel odio vulputate, quis finibus lorem
+      fermentum. Donec nisi massa, commodo ac malesuada at, maximus in odio.
+      Sed iaculis magna ac dignissim rhoncus. Nulla pretium orci viverra risus
+      volutpat congue. In euismod maximus ligula non pharetra.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in sapien
+      a elit commodo tempus. Nam dignissim, augue sit amet vulputate
+      sollicitudin ut fermentum urna massa eget
+      tortor. Phasellus elementum enim vel odio vulputate, quis finibus lorem
+      fermentum. Donec nisi massa, commodo ac malesuada at, maximus in odio.
+      Sed iaculis magna ac dignissim rhoncus. Nulla pretium orci viverra risus
+      volutpat congue. In euismod maximus ligula non pharetra.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in sapien
+      a elit commodo tempus. Nam dignissim, augue sit amet vulputate
+      sollicitudin ut fermentum urna massa eget
+      tortor. Phasellus elementum enim vel odio vulputate, quis finibus lorem
+      fermentum. Donec nisi massa, commodo ac malesuada at, maximus in odio.
+      Sed iaculis magna ac dignissim rhoncus. Nulla pretium orci viverra risus
+      volutpat congue. In euismod maximus ligula non pharetra.
+    </p>    
+
+  </body>
+</html>
