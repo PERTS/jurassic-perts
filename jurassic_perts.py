@@ -46,7 +46,7 @@ class RenderPdf(webapp2.RequestHandler):
             # Check if style embedder is checked
             if self.request.get('embed_styles') == 'on':
                 logging.info('Embedding default styles for PDF')
-                # @todo: embed CSS from 'templates/reports/_styles.html'
+                # Eembed CSS from 'templates/reports/_styles.html'
                 # -- before the </head> element in the document
                 # -- or create <head></head> and inject in there
                 if '</head>' in html:
