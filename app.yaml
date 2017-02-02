@@ -22,7 +22,20 @@ libraries:
   version: latest
 - name: ssl
   version: latest
+- name: lxml
+  version: "2.3"
 
 # http://stackoverflow.com/questions/33665274/python-typeerror-when-receiving-server-response
 env_variables:
   GAE_USE_SOCKETS_HTTPLIB : '1'
+
+skip_files:
+- ^(.*/)?#.*#$
+- ^(.*/)?.*~$
+- ^(.*/)?.*\.py[co]$
+- ^(.*/)?.*/RCS/.*$
+- ^(.*/)?\..*$
+- ^.*bower\_components$
+- ^.*node\_modules$
+- ^sass$
+- ^generate.py$

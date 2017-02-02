@@ -12,6 +12,8 @@ import webapp2
 import jinja2
 import docraptor
 
+from doc_generator import generate_pdf
+
 from google.appengine.api import urlfetch
 
 from secretvalue import SecretValue
@@ -33,98 +35,58 @@ class MainPage(webapp2.RequestHandler):
 class RenderPdf(webapp2.RequestHandler):
 
     def post(self):
+
+        def callback_function(duration=0, error=None, **kwargs):
+            if error:
+                logging.critical(error)
+                return
+            if 'doc_response' in kwargs:
+                doc_response = kwargs['doc_response']
+            logging.info("PDF generated in ~{}ms".format(duration))
+            self.response.out.write(doc_response)
+            self.response.headers.add_header(
+                "Content-disposition", "attachment")
+            self.response.headers.add_header(
+                "Content-type", "application/pdf")
+
+        # Arguments to be used by the PDF generation function
+        kwargs = {}
+
         document = self.request.POST.getall('attachments')[0]
-        template_data = {}
-        now = datetime.datetime.now()
-        template_data['monthyear'] = now.strftime("%B %Y")
         if isinstance(document, unicode):
+            template_data = {}
+            now = datetime.datetime.now()
+            template_data['monthyear'] = now.strftime("%B %Y")
             template_name = 'templates/reports/example.html'
             html = render_template(template_name, **template_data)
             logging.info("Generating PDF from: {}".format(template_name))
         else:
             html = document.file.read()
             # Check if style embedder is checked
+            if self.request.get('generate_toc') == 'on':
+               kwargs['build_toc'] = True
+            # Check if style embedder is checked
             if self.request.get('embed_styles') == 'on':
-                logging.info('Embedding default styles for PDF')
-                # Eembed CSS from 'templates/reports/_styles.html'
-                # -- before the </head> element in the document
-                # -- or create <head></head> and inject in there
-                if '</head>' in html:
-                    logging.info('Head found.')
-                else:
-                    logging.info('No head found, creating...')
-                    # Find <body> and inject before that
-                    body_loc = html.index('<body>')
-                    html = "{}<head></head>{}".format(
-                        html[:body_loc], html[body_loc:])
+                kwargs['include_default_styles'] = True
 
-                # Fetch styles html
-                styles_template = 'templates/reports/_styles.html'
-                styles_html = render_template(styles_template)
+        generate_pdf(callback_function, html=html, **kwargs)
 
-                # Find </head> and inject styles before that
-                head_loc = html.index("</head>")
-                html = "{}{}{}".format(
-                    html[:head_loc], styles_html, html[head_loc:])
+        # # Init DocRaptor Api
+        # docraptor_username = SecretValue.get_by_id('docraptor_username')
+        # if docraptor_username is None:
+        #     logging.error('No "docraptor_username" value set with SecretValue')
+        #     self.response.out.write('Please set "docraptor_username" with SecretValue')
+        #     return
+        # docraptor.configuration.username = docraptor_username.value
+        # doc_api = docraptor.DocApi()
 
-        # Init DocRaptor Api
-        docraptor_username = SecretValue.get_by_id('docraptor_username')
-        if docraptor_username is None:
-            logging.error('No "docraptor_username" value set with SecretValue')
-            self.response.out.write('Please set "docraptor_username" with SecretValue')
-            return
-        docraptor.configuration.username = docraptor_username.value
-        doc_api = docraptor.DocApi()
-
-        # Determine if we'll be using test mode or not.
-        test_mode = True;
-        access_code = SecretValue.get_by_id('access_code')
-        if access_code is not None:
-            test_mode = (access_code.value != self.request.get('access_code'))
-        else:
-            logging.error('No "access_code" value set with SecretValue')
-
-        # Variables for tracking generation time
-        time_counter = 0
-        sleep_increment = 0.1  # in seconds
-
-        try:
-            create_response = doc_api.create_async_doc({
-                "test": test_mode,         # test documents are free but watermarked
-                "document_content": html,           # supply content directly
-                "name": "docraptor-python.pdf",     # help find document later
-                "document_type": "pdf",             # pdf or xls or xlsx
-                "prince_options": {
-                    "javascript": True             # generated content in js
-                    # 'baseurl': 'https://s3.amazonaws.com'
-                }
-            })
-
-            while True:
-                status_response = doc_api.get_async_doc_status(create_response.status_id)
-                if status_response.status == "completed":
-                    doc_response = doc_api.get_async_doc(status_response.download_id)
-                    logging.info("PDF generated in ~{}ms".format(
-                        time_counter * sleep_increment * 1000))
-                    self.response.out.write(doc_response)
-                    self.response.headers.add_header(
-                        "Content-disposition", "attachment")
-                    self.response.headers.add_header(
-                        "Content-type", "application/pdf")
-                    break
-                elif status_response.status == "failed":
-                    logging.critical("FAILED")
-                    logging.critical(status_response)
-                    break
-                else:
-                    time_counter += 1
-                    time.sleep(sleep_increment)
-
-        except docraptor.rest.ApiException as error:
-            logging.critical(error)
-            logging.critical(error.message)
-            logging.critical(error.code)
-            logging.critical(error.response_body)
+        # # Determine if we'll be using test mode or not.
+        # test_mode = True;
+        # access_code = SecretValue.get_by_id('access_code')
+        # if access_code is not None:
+        #     test_mode = (access_code.value != self.request.get('access_code'))
+        # else:
+        #     logging.error('No "access_code" value set with SecretValue')
 
 
 class SecretValues(webapp2.RequestHandler):

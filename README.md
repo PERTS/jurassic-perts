@@ -6,7 +6,69 @@ styling used by the PERTS organization. It is available for use at
 http://jurassic-perts.appspot.com. Please contact the PERTS team for an access
 code to use non-test documents.
 
-## About Styling
+## Generating Documents
+
+OPTION 1. LOCAL
+
+Generates PDFs from HTML files using DocRaptor
+
+1. Put the html files you want to convert in subdirectory `inbox`
+
+2. Then from the root directory run:
+
+```
+python generate.py
+```
+
+4. PDF files will be generated in a `outbox` subdirectory.
+
+### Setup
+
+```
+sudo pip install lxml 3.7.1
+```
+
+### Production v. Testing
+
+By default PDF files are generated in 'testing' mode with DocRaptor. These are
+free for PERTS and do not count against the quota we pay for each month.
+
+To make PDFs for production (something you would want to send to schools) you
+will need to add a `production` flag to the python command:
+
+```
+python generate.py --production
+```
+
+### Pre-defined Styles
+
+To make your PDF Generation especially simple, we provide a set of styles that
+will help your documents conform to PERTS style guidelines. This includes a
+cover page, headers, footers, and much more.
+
+To use our styles, you don't need to do a thing. However, if you'd like to
+ignore them and use your own embedded styles, you can run the python command:
+
+```
+python generate.py --ignore-styles
+```
+
+### Table of Contents
+
+To make your life _even easier_ PDF Generator is able to automatically generate
+a Table of Contents (TOC) for your document.
+
+```
+python generate.py --toc
+```
+
+You can learn more about how the Table of Contents is created further in this
+document. Please read this over, especially if your documents are not coming
+out the way you'd expect.
+
+________________
+
+## Notes on Styling
 
 DocRaptor provides an API to render PDF document from HTML using Prince XML
 software.
@@ -29,9 +91,9 @@ A variety of basic styles are covered by the CSS rules in
 `/templates/reports/_styles.html`. These are injected in any file by default
 but can be turned off if you'd like to use your own.
 
-An example of html input: [example.html](../master/templates/reports/example.html)
+An example of html input: [example.html](../master/examples/example.html)
 
-And corresponding pdf output: [example.pdf](../master/outbox/example.pdf)
+And corresponding pdf output: [example.pdf](../master/examples/example.pdf)
 
 ### Cover page
 
@@ -93,8 +155,23 @@ headers like so:
 This ensures that the Table of Contents will link to pages within the PDF.
 These should match the `href`s you specify in the `a` elements in your TOC.
 
-*Note*: We may explore auto-generation of the TOC in future iterations if that
-would be useful.
+### Auto-Generated TOC
+
+A table of contents can be generated automatically following a specific set of
+rules. The TOC will resemble the example code above and use the following:
+
+1. The HTML Parser searches for and finds all `h2` `h2` and `h3` elements in
+your HTML.
+2. For each header, an `id` is assigned to it by parameterizing its text. For
+example, "Header 1" would become header-1 to be url safe.
+3. A table of contents is constructed by embedding the header names in order.
+Any lesser headers will appear within any leading ones.
+4. The table of contents is inserted into the document in a place of the
+following line of HTML. This allows you to control the position.
+```html
+<div id="toc"></div>
+```
+*Note: Automatic generation will fail if the html above is missing.
 
 ### Figures
 

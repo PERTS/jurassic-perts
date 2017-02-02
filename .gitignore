@@ -6,3 +6,5 @@
 **/.sass-cache
 *.sublime-project
 *.sublime-workspace
+inbox/*.html
+outbox/*.pdf
