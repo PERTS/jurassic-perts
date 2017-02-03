@@ -38,4 +38,4 @@ skip_files:
 - ^.*bower\_components$
 - ^.*node\_modules$
 - ^sass$
-- ^generate.py$
+- ^generate.py$  # Causes I/O issues if included

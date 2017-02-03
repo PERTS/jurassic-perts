@@ -29,7 +29,8 @@
       <form id="docForm" action="/api/doc" method="POST" enctype="multipart/form-data">
         <input multiple id="file" name="attachments" type="file" />
         <div class="input-wrapper">
-          <label>Enter your secret code to remove watermarks<br>(125/mo quota and 7&#162; per document after)</label><br>
+          <label>Enter your secret code to remove watermarks<br>
+          <small>(125 per month free quota at 7&#162; per document after)</small></label><br>
           <input type="text" name="access_code" placeholder="Code" />
         </div>
         <div class="input-wrapper">
@@ -38,7 +39,13 @@
             Embed standard styles?
           </label>
         </div>
-        <input type="submit" class="btn" value="PDF Please!"></input>
+        <div class="input-wrapper">
+          <input type="checkbox" name="generate_toc" checked>
+          <label for="generate_toc">
+            Generate Table of Contents?
+          </label>
+        </div>
+        <input type="submit" class="btn" value="GENERATE PDF"></input>
       </form>
     </div>
   </div>
