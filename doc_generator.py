@@ -7,7 +7,6 @@ from lxml.html import fromstring, tostring
 
 import config
 
-
 # Function builds Table of Contents based on an HTML string
 # Returns HTML with adjustments for Table of Contents
 def build_toc(html):
@@ -111,10 +110,19 @@ def insert_default_styles(html):
     return new_html
 
 
-def generate_pdf(callback, html, filename="example", **kwargs):
+def generate_pdf(api_key, html, callback, **kwargs):
     # First get HTML string to use
     if html is None:
+        callback(error='No HTML found.')
         return
+
+    if api_key is None:
+        callback(error='No API key found.')
+        return
+
+    filename = 'example'
+    if 'filename' in kwargs:
+        filename = kwargs['filename']
 
     if 'build_toc' in kwargs:
         html = build_toc(html)
@@ -127,7 +135,7 @@ def generate_pdf(callback, html, filename="example", **kwargs):
         html = insert_default_styles(html)
 
     # Init the docraptor
-    docraptor.configuration.username = config.docraptor_username
+    docraptor.configuration.username = api_key
     doc_api = docraptor.DocApi()
 
     print("Converting file \"{}\"...".format(filename))

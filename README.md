@@ -6,21 +6,36 @@ styling used by the PERTS organization. It is available for use at
 http://jurassic-perts.appspot.com. Please contact the PERTS team for an access
 code to use non-test documents.
 
-## Generating Documents
+## Option 1. Web Interface
 
-OPTION 1. LOCAL
+The easiest way to use the PDF generator is just to use the form available
+online at 
+[http://jurassic-perts.appspot.com](http://jurassic-perts.appspot.com).
+Simply upload your own HTML file (just one at a time) and set the appropriate
+settings. Your PDF will download in the same way any other document would after
+a short delay.
 
-Generates PDFs from HTML files using DocRaptor
+Note on KEY:
+
+________________
+
+## Option 2. Running Locally
+
+For the more savvy user, running PDF generator on your on computer offers much
+more functionality and flexibility. Benefits include: converting multiple
+documents with a single command, faster processing, and better error reporting.
+
+Follow the steps below to perform PDF generation on your computer (Mac).
+Instructions may vary for Windows devices.
 
 1. Put the html files you want to convert in subdirectory `inbox`
-
 2. Then from the root directory run:
 
 ```
 python generate.py
 ```
 
-4. PDF files will be generated in a `outbox` subdirectory.
+3. PDF files will be generated in a `outbox` subdirectory.
 
 ### Setup
 

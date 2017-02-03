@@ -69,24 +69,23 @@ class RenderPdf(webapp2.RequestHandler):
             if self.request.get('embed_styles') == 'on':
                 kwargs['include_default_styles'] = True
 
-        generate_pdf(callback_function, html=html, **kwargs)
+        # Init DocRaptor Api
+        docraptor_username = SecretValue.get_by_id('docraptor_username')
+        if docraptor_username is None:
+            logging.error('No "docraptor_username" value set with SecretValue')
+            self.response.out.write('Please set "docraptor_username" with SecretValue')
+            return
 
-        # # Init DocRaptor Api
-        # docraptor_username = SecretValue.get_by_id('docraptor_username')
-        # if docraptor_username is None:
-        #     logging.error('No "docraptor_username" value set with SecretValue')
-        #     self.response.out.write('Please set "docraptor_username" with SecretValue')
-        #     return
-        # docraptor.configuration.username = docraptor_username.value
-        # doc_api = docraptor.DocApi()
+        # Determine if we'll be using test mode or not.
+        access_code = SecretValue.get_by_id('access_code')
+        if access_code is not None:
+            if (access_code.value == self.request.get('access_code')):
+                kwargs['is_production'] = True
+        else:
+            logging.error('No "access_code" value set with SecretValue')
 
-        # # Determine if we'll be using test mode or not.
-        # test_mode = True;
-        # access_code = SecretValue.get_by_id('access_code')
-        # if access_code is not None:
-        #     test_mode = (access_code.value != self.request.get('access_code'))
-        # else:
-        #     logging.error('No "access_code" value set with SecretValue')
+        generate_pdf(docraptor_username.value, html, callback_function,
+            **kwargs)
 
 
 class SecretValues(webapp2.RequestHandler):

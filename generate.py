@@ -53,12 +53,12 @@ for html_file in os.listdir(config.inbox_dir):
 
     # Determine if file is the correct format
     if html_file.split('.')[1] == 'html':
-        filename = html_file.split('.')[0]
+        kwargs['filename'] = html_file.split('.')[0]
         html = urllib.urlopen("{}/{}".format(
             config.inbox_dir, html_file)).read()       
 
         print("Converting file \"{}\"...".format(html_file))
-        generate_pdf(callback_function, html=html, filename=filename, **kwargs)
+        generate_pdf(config.docraptor_username, html, callback_function, **kwargs)
 
     else:
         print('\"{}\" is not a valid HTML file. Skipping.'.format(html_file))
