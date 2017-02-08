@@ -1,6 +1,7 @@
 import os
 import sys
 import urllib
+import argparse
 
 import config
 from doc_generator import generate_pdf
@@ -25,9 +26,20 @@ def callback_function(duration=0, error=None, **kwargs):
 # Arguments to be used by the PDF generation function
 kwargs = {}
 
+parser = argparse.ArgumentParser(description='Process some integers.')
+# Optional argument
+parser.add_argument('api_key', type=str,
+                    help='Required string')
+# Switch
+parser.add_argument('--production', action='store_true',
+                    help='A boolean switch')
+# Switch
+parser.add_argument('--ignore_styles', action='store_true',
+                    help='A boolean switch')
+args = parser.parse_args()
 # Determine testing or production (paid) from arguments
 # Default to 'test' because why waste money?
-if '--production' in sys.argv:
+if args.production:
     print('Running script for PRODUCTION')
     kwargs['is_production'] = True
 else:
@@ -35,7 +47,7 @@ else:
 
 # Determine if default styles should be embedded or not
 # Default to True because our styles are bomb
-if '--ignore-styles' in sys.argv:
+if args.ignore_styles:
     print('Ignoring awesome pre-built styles...')
 else:
     print('Using awesome pre-built styles...')
@@ -58,7 +70,7 @@ for html_file in os.listdir(config.inbox_dir):
             config.inbox_dir, html_file)).read()       
 
         print("Converting file \"{}\"...".format(html_file))
-        generate_pdf(config.docraptor_username, html, callback_function, **kwargs)
+        generate_pdf(args.api_key, html, callback_function, **kwargs)
 
     else:
         print('\"{}\" is not a valid HTML file. Skipping.'.format(html_file))

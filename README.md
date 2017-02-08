@@ -15,7 +15,12 @@ Simply upload your own HTML file (just one at a time) and set the appropriate
 settings. Your PDF will download in the same way any other document would after
 a short delay.
 
-Note on KEY:
+#### Note on API Key:
+
+API Keys for the web application are setup through SecretValues in the API.
+In order to use an API key to create a non-test document, you'll need to fetch
+an access code from a PERTS team member. (Alternatively, you could also use
+your own API key and run locally, see below.)
 
 ________________
 
@@ -32,12 +37,18 @@ Instructions may vary for Windows devices.
 2. Then from the root directory run:
 
 ```
-python generate.py
+python generate.py your_api_key
 ```
+Note: `your_api_key` is a valid DocRaptor API Key. If you are on the PERTS team
+you can obtain a key from [this document](https://docs.google.com/document/d/1IGn6A5pB_5YCltbI9r1CGCvWRFG1Hcna3ya67ulZeLA/). You can also set up an
+account of your own through [DocRaptor](https://docraptor.com/signup).
 
 3. PDF files will be generated in a `outbox` subdirectory.
 
 ### Setup
+
+Please run the following command at add necessary python libraries to your
+machine. You may need to install `pip` if you have not already done so.
 
 ```
 sudo pip install lxml 3.7.1
@@ -52,7 +63,7 @@ To make PDFs for production (something you would want to send to schools) you
 will need to add a `production` flag to the python command:
 
 ```
-python generate.py --production
+python generate.py your_api_key --production
 ```
 
 ### Pre-defined Styles
@@ -65,7 +76,7 @@ To use our styles, you don't need to do a thing. However, if you'd like to
 ignore them and use your own embedded styles, you can run the python command:
 
 ```
-python generate.py --ignore-styles
+python generate.py your_api_key --ignore-styles
 ```
 
 ### Table of Contents
@@ -74,7 +85,7 @@ To make your life _even easier_ PDF Generator is able to automatically generate
 a Table of Contents (TOC) for your document.
 
 ```
-python generate.py --toc
+python generate.py your_api_key --toc
 ```
 
 You can learn more about how the Table of Contents is created further in this
