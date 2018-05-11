@@ -134,6 +134,10 @@ def generate_pdf(api_key, html, callback, **kwargs):
     if 'include_default_styles' in kwargs:
         html = insert_default_styles(html)
 
+    # Save intermediate html output to outbox
+    with open('outbox/{}.html'.format(filename), 'w') as fh:
+        fh.write(html)
+
     # Init the docraptor
     docraptor.configuration.username = api_key
     doc_api = docraptor.DocApi()
