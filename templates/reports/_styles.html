@@ -1,11 +1,13 @@
 <!-- Universal styles for report templates -->
 
 <script>
-  Prince.addScriptFunc("datestamp", function() {
-    var date = new Date();
-    var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    return monthNames[date.getMonth()] + ' ' + date.getFullYear().toString();
-  });
+  if (window.Prince) {
+    Prince.addScriptFunc("datestamp", function() {
+      var date = new Date();
+      var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      return monthNames[date.getMonth()] + ' ' + date.getFullYear().toString();
+    });
+  }
 </script>
 
 <style type="text/css">

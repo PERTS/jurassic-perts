@@ -154,8 +154,16 @@ def generate_pdf(api_key, html, callback, **kwargs):
             "document_content": html,           # supply content directly
             "name": "{}.pdf".format(filename),  # help find document later
             "document_type": "pdf",             # pdf or xls or xlsx
+            # Tell DocRaptor to parse the document including javascript, first,
+            # then pass the result to Prince. This allows js to alter the page
+            # and have the result appear in the pdf.
+            "javascript": True,
             "prince_options": {
-                "javascript": True              # generated content in js
+                # You can have Prince parse the document's javascript, but it's
+                # pretty useless since it can't alter the page. It is used,
+                # however, in templates/reports/_styles. This can probably be
+                # refactored away.
+                "javascript": True
                 # 'baseurl': 'https://s3.amazonaws.com'
             }
         })
