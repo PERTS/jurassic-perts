@@ -179,45 +179,54 @@ table tr td {
   padding-left: 20px;
   padding-top: 5px;
 }
-table.xtable {
+table.display-table {
   padding: 0;
   border-collapse: collapse;
   margin: 25pt auto;
   min-width: 50%;
-  color: #3a88c4 !important;
+  font-size: 11pt;
 }
-table.xtable tr {
+table.display-table tr {
   border-top: 1px solid #5bade6;
   background-color: white;
   margin: 0;
   padding: 0;
   position: relative;
 }
-table.xtable tr:first-child {
+table.display-table thead tr {
   position: relative;
   background-color: #d3e9f8 !important;
 }
-table.xtable tr:nth-child(2n) {
+table.display-table tbody tr:nth-child(2n) {
   background-color: #f8f8f8;
   background-color: #eff5f9 !important;
 }
-table.xtable tr th {
+table.display-table tr th {
   font-weight: bold;
   border: 1px solid #5bade6;
   border-bottom-width: 2px;
   margin: 0;
   padding: 8px 15px;
 }
-table.xtable tr td {
+table.display-table tr td {
   border: 1px solid #5bade6;
   margin: 0;
   padding: 8px 15px;
 }
-table.xtable tr th :first-child, table tr td :first-child {
+table.display-table tr th :first-child, table tr td :first-child {
   margin-top: 0;
 }
-table.xtable tr th :last-child, table tr td :last-child {
+table.display-table tr th :last-child, table tr td :last-child {
   margin-bottom: 0;
+}
+table.display-table caption {
+  color: #777 !important;
+  text-align: center;
+  font-size: 9.5pt;
+  margin-bottom: 5pt;
+}
+table.text-table tr td {
+  vertical-align: text-top;
 }
 
 caption {
@@ -536,6 +545,18 @@ blockquote > :last-child {
   margin-bottom: 0;
 }
 
+#toc::before {
+  content: "Table of Contents";
+  font-size: 17pt;
+  color: #3fadea !important;
+  line-height: 1.2;
+  margin-bottom: 15pt;
+  display: inline-block;
+  page-break-after: avoid;
+  clear: both;
+  font-weight:bold;
+}
+
 @media print {
   a[href] {
     color: #338EDD !important;
@@ -637,17 +658,6 @@ blockquote > :last-child {
     list-style-type: none;
   }
 
-  #toc::before {
-    content: "Table of Contents";
-    font-size: 17pt;
-    color: #3fadea !important;
-    line-height: 1.2;
-    margin-bottom: 15pt;
-    display: inline-block;
-    page-break-after: avoid;
-    clear: both;
-    font-weight:bold;
-  }
   #toc li::marker { width: 2.4cm }
   #toc li.left::marker { text-align: left }
   #toc li.center::marker { text-align: center }
